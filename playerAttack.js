@@ -32,7 +32,6 @@ function Weapon(x, y, w, h) {
         this.y -= 25
         this.draw();
         // removeFire()
-        // playerSound()
 
     }
     for (let i=0; i < weaponArray.length; i++) {

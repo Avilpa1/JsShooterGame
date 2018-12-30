@@ -33,7 +33,7 @@ function Enemy(w, h, color, x, y, type, speed) {
 for (let i=0; i < 10; i++) {
     var raduis = 35//Math.random() * 3 + 1;
     let x = Math.random() * (innerWidth - raduis * 2) + raduis;
-    let y = -100//Math.random() * (innerHeight / 5 - raduis * 2) + raduis;;
+    let y = -200//Math.random() * (innerHeight / 5 - raduis * 2) + raduis;;
     let speed = Math.floor(Math.random() * 5) + 3
     // let dx = (Math.random() - 0.5) * 1;
     // let dy = (Math.random() - 0.5) * 1;

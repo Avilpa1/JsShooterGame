@@ -13,6 +13,7 @@ let specialArray = [];
 
 let playerHealth = 100
 let score = 0
+let music
 let maxRadius = 40;
 let minRadius = 10;
 
@@ -92,22 +93,16 @@ function loseDisplay() {
     ctx.fillText('Game Over!', innerWidth / 2 - 100, innerHeight / 2); 
 }
 
-
-function bktheme(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    // this.play = function(){
-    this.sound.play();
-    //     playerSound = ''
-    // }
-    // this.stop = function(){
-    //     this.sound.pause();
-    // }    
-}
+    music = document.createElement("audio");
+    music.src = './sfx/theme1.mp3'
+    // sound = document.getElementById("audio");
+    music.setAttribute("preload", "auto");
+    music.setAttribute("controls", "none");
+    music.style.display = "none";
+    music.loop = true
+    music.volume = 0.2
+    document.body.appendChild(music);
+    // music.play()
 
 
 
