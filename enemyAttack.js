@@ -32,7 +32,12 @@ function enemyFire(x, y) {
 
 for (let i=0; i < enemyArray.length; i++) {
     setInterval(function() {
-        enemyFire(enemyArray[i].x + 30, enemyArray[i].y + 30)
+        let x = enemyArray[i].x + 30
+        let y = enemyArray[i].y + 30
+        
+        // enemyWeaponArray.push(new EnemyAttack(x, y, 1, 10))
+        
+        enemyFire(x, y)
     }, 600)
 }
 

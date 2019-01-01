@@ -31,47 +31,22 @@ function Weapon(x, y, w, h) {
     this.update = function() {
         this.y -= 25
         this.draw();
-        // removeFire()
-
-    }
-    for (let i=0; i < weaponArray.length; i++) {
-        if(weaponArray[i].y <= 0) {
-            // weaponArray.splice(i,1)
-            weaponHit(weaponArray[i])
-        }
-    }
-}
-
-
-    
-function removeFire() {
-    for (let i=0; i < weaponArray.length; i++) {
-        if(Math.floor(weaponArray[i].y) <= 0) {
-            weaponArray.splice(i,1)
-            // console.log(weaponArray)
-        }
-    }
-}
-
-// function weaponHit() {
-//     for (let i=0; i < enemyArray.length; i++) {
-//         if(Math.floor(enemyArray[i].x) == mouse.x) {
-//             enemyArray.splice([i],1)
-//             // console.log(circleArray[i].x + ' ' + circleArray[i].y)
-//             score += 100
-//             console.log(score)
             
- 
-//         }
-//     }
-// }
+            for (let i=0; i < weaponArray.length; i++) {
+                if(weaponArray[i].y <= 0) {
+                weaponHit(weaponArray[i])
+                removeFire()
+            }
+        }
+    }
+}
 
-function weaponHit(m) {
+function weaponHit(w) {
     for (let i=0; i < enemyArray.length; i++) {
         let e = enemyArray[i]
 // console.log(e)
 // console.log(m)
-        if(m.x > e.x && m.x < e.x + e.w) {
+        if(w.x > e.x && w.x < e.x + e.w) {
             console.log('hit')
             enemyArray.splice([i],1)
             new enemyExplosion("./sfx/enemyExplosion.wav")
@@ -92,6 +67,15 @@ function weaponHit(m) {
                 let color = colorArray2[Math.floor(Math.random()*colorArray.length)]
                 debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
             }
+        }
+    }
+}
+
+function removeFire() {
+    for (let i=0; i < weaponArray.length; i++) {
+        if(Math.floor(weaponArray[i].y) < 0) {
+            weaponArray.splice(i,1)
+            // console.log(weaponArray)
         }
     }
 }

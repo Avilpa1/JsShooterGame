@@ -104,6 +104,6 @@ function loseDisplay() {
     document.body.appendChild(music);
     // music.play()
 
-
+// console.log(music)
 
 animate()

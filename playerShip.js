@@ -94,6 +94,7 @@ function damage() {
 function playerLose() {
     new playerExplosion('./sfx/playerExplosion.mp3')
     shipArray = []
+    weaponArray = []
     let playerPosX = mouse.x
     let playerPosY = mouse.y
     
@@ -110,6 +111,14 @@ function playerLose() {
         let size = Math.floor(Math.random() * 1) + 1
         let dx = (Math.random() - 0.5) * 10;
         let dy = (Math.random() - 0.5) * 10;
+        let color = colorArray2[Math.floor(Math.random()*colorArray.length)]
+        debrisArray.push(new enemyDestroyed(playerPosX, playerPosY , size, dx, dy, color))
+    }
+    
+        for(let d=0; d < 70; d++) {
+        let size = Math.floor(Math.random() * 1) + 1
+        let dx = (Math.random() - 0.5) * 5;
+        let dy = (Math.random() - 0.5) * 5;
         let color = colorArray2[Math.floor(Math.random()*colorArray.length)]
         debrisArray.push(new enemyDestroyed(playerPosX, playerPosY , size, dx, dy, color))
     }

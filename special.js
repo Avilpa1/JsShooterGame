@@ -20,9 +20,10 @@ function Special(width, height, color, x, y, type) {
         }
     }
         this.update = function() {
-            this.x-=5
+            this.x -= 3
             pickup()
             this.draw();
+            removeSpecial() 
         }
 
     }
@@ -37,7 +38,7 @@ setInterval(function() {
     specialArray.push(new Special(60, 72, "./health.png", x, y, "image"));
     
 }, 10000)
-
+// }, 1000)
 
 function pickup() {
     for(let i=0; i<specialArray.length; i++) {
@@ -51,6 +52,14 @@ function pickup() {
         
         if (playerHealth >= 100) {
             playerHealth = 100
+        }
+    }
+}
+
+function removeSpecial() {
+    for (let i=0; i < specialArray.length; i++) {
+        if(Math.floor(specialArray[i].x) < -100) {
+            specialArray.splice(i,1)
         }
     }
 }
