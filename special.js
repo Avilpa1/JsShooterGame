@@ -21,37 +21,53 @@ function Special(width, height, color, x, y, type) {
     }
         this.update = function() {
             this.x -= 3
-            pickup()
+            // pickup()
             this.draw();
             removeSpecial() 
+            
+            }
         }
 
-    }
 
-
-setInterval(function() {
+let specialInterval = setInterval(function() {
     console.log('special')
     
     let x = innerWidth + 300 
-    let y = Math.random() * (innerHeight - raduis * 2) - 200;
+    let y = Math.random() * (innerHeight/2);
 
     specialArray.push(new Special(60, 72, "./health.png", x, y, "image"));
     
-}, 10000)
-// }, 1000)
+}, 20000)
+// }, 5000)
 
-function pickup() {
-    for(let i=0; i<specialArray.length; i++) {
-        // console.log(specialArray[i])
+// function pickup(w) {
+//     for(let i=0; i<specialArray.length; i++) {
+//         let s = specialArray[i]
+
+//         if (mouse.x == specialArray[i].x) {
+//             specialArray.splice(i,1)
+//             playerHealth += 25
+//             new specialSound(('./sfx/health.wav'))
+//         }
         
-        if (mouse.x == specialArray[i].x) {
+//         if (playerHealth >= 100) {
+//             playerHealth = 100
+//         }
+//     }
+// }
+
+function pickup(w) {
+    for (let i=0; i < specialArray.length; i++) {
+        let e = specialArray[i]
+
+        if(w.x > e.x && w.x < e.x + 50) {
+            new specialSound(('./sfx/health.wav'))
             specialArray.splice(i,1)
             playerHealth += 25
-            new specialSound(('./sfx/health.wav'))
-        }
-        
-        if (playerHealth >= 100) {
-            playerHealth = 100
+            
+            if (playerHealth >= 100) {
+                playerHealth = 100
+            }
         }
     }
 }

@@ -11,8 +11,6 @@ function EnemyAttack(x, y, w, h) {
         ctx.stroke();
         ctx.fillStyle = 'red'
         ctx.fill()
-
-        
     }
     
     this.update = function() {
@@ -21,8 +19,6 @@ function EnemyAttack(x, y, w, h) {
         removeEnemyFire()
         this.draw();
     }
-
-
 }
 
 function enemyFire(x, y) {

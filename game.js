@@ -10,8 +10,10 @@ let shipArray = [];
 let enemyArray = [];
 let debrisArray = [];
 let specialArray = [];
+let bossArray = [];
 
 let playerHealth = 100
+let bossHealth = 500
 let score = 0
 let music
 let maxRadius = 40;
@@ -63,13 +65,22 @@ function animate() {
         for (let i=0; i < specialArray.length; i++) {
         specialArray[i].update()
     }
+        for (let i=0; i < bossArray.length; i++) {
+        bossArray[i].update()
+    }
 
     scoreDisplay()
     healthDisplay()
+
     
     if(playerHealth <= 0) {
        loseDisplay()
        playerHealth = 0
+    }
+    
+    if(bossHealth <= 0) {
+       winDisplay()
+       playerHealth = 100
     }
     
 }
@@ -91,6 +102,17 @@ function loseDisplay() {
     ctx.font = "40px Arial";
     ctx.fillStyle = "red";
     ctx.fillText('Game Over!', innerWidth / 2 - 100, innerHeight / 2); 
+}
+
+function winDisplay() {
+    ctx.font = "40px Arial";
+    ctx.fillStyle = "red";
+    ctx.fillText('You win!!!', innerWidth / 2 - 100, innerHeight / 2); 
+}
+
+function menu() {
+    ctx.fillStyle = 'grey';
+    ctx.fillRect(innerWidth/2, innerHeight/2, 400, 600);
 }
 
     music = document.createElement("audio");

@@ -7,6 +7,15 @@ window.addEventListener('click',
         
 })
 
+
+window.addEventListener("keypress",
+    function() {
+        mouse.x = window.event.pageX;
+        mouse.y = window.event.pageY;
+        weaponFire(mouse.x, mouse.y)
+        new playerWeapon1("./sfx/iceball.wav");
+});
+
 function weaponFire(x, y) {
         weaponArray.push(new Weapon(x, y, 1, 10))
 }
@@ -31,15 +40,19 @@ function Weapon(x, y, w, h) {
     this.update = function() {
         this.y -= 25
         this.draw();
-            
+
             for (let i=0; i < weaponArray.length; i++) {
                 if(weaponArray[i].y <= 0) {
                 weaponHit(weaponArray[i])
+                bossHit(weaponArray[i], i)
+                pickup(weaponArray[i])
                 removeFire()
+
             }
         }
     }
 }
+
 
 function weaponHit(w) {
     for (let i=0; i < enemyArray.length; i++) {
@@ -51,7 +64,7 @@ function weaponHit(w) {
             enemyArray.splice([i],1)
             new enemyExplosion("./sfx/enemyExplosion.wav")
             score += 100
-         
+    
              for(let d=0; d < 20; d++) {
                 let size = Math.floor(Math.random() * 3) + 1
                 let dx = (Math.random() - 0.5) * 20;
@@ -73,7 +86,7 @@ function weaponHit(w) {
 
 function removeFire() {
     for (let i=0; i < weaponArray.length; i++) {
-        if(Math.floor(weaponArray[i].y) < 0) {
+        if(Math.floor(weaponArray[i].y) <= 0) {
             weaponArray.splice(i,1)
             // console.log(weaponArray)
         }

@@ -59,7 +59,7 @@ function resetEnemies() {
     }
 }
 
-setInterval(function(){
+let enemyInterval = setInterval(function(){
     weaponArray = [];
     enemyWeaponArray = [];
     enemyArray = [];

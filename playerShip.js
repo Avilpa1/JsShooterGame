@@ -21,9 +21,12 @@ function Ship(width, height, color, x, y, type) {
     this.draw = function() {
         if (type == "image") {
             ctx.drawImage(this.image, mouse.x - 30, mouse.y, this.width, this.height);
-        } else {
-            ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
+            // if (mouse.x <= 300) {
+            //     console.log('test')
+            //     this.image.src = './playerShip2.png'
+            // } else {
+            //     this.image.src = color
+            // }
         }
     }
         this.update = function() {
@@ -39,8 +42,8 @@ function shipSpawn() {
     let x = mouse.x//innerWidth / 2
     let y = mouse.y//innerHeight - 200
 
-    shipArray.push(new Ship(60, 60, "https://media.indiedb.com/images/games/1/68/67090/spaceship.1.png", x, y, "image"));
-    
+    // shipArray.push(new Ship(60, 60, "https://media.indiedb.com/images/games/1/68/67090/spaceship.1.png", x, y, "image"));
+    shipArray.push(new Ship(60, 82, "./playerShip2.png", x, y, "image"));
 }
 
 // for (let i=0; i < weaponArray.length; i++) {
@@ -97,7 +100,7 @@ function playerLose() {
     weaponArray = []
     let playerPosX = mouse.x
     let playerPosY = mouse.y
-    
+    clearInterval(bossEnemyInterval)
     
     for(let d=0; d < 20; d++) {
         let size = Math.floor(Math.random() * 3) + 1
