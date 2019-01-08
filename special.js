@@ -35,26 +35,10 @@ let specialInterval = setInterval(function() {
     let x = innerWidth + 300 
     let y = Math.random() * (innerHeight/2);
 
-    specialArray.push(new Special(60, 72, "./health.png", x, y, "image"));
+    specialArray.push(new Special(60, 72, "./images/health.png", x, y, "image"));
     
 }, 20000)
 // }, 5000)
-
-// function pickup(w) {
-//     for(let i=0; i<specialArray.length; i++) {
-//         let s = specialArray[i]
-
-//         if (mouse.x == specialArray[i].x) {
-//             specialArray.splice(i,1)
-//             playerHealth += 25
-//             new specialSound(('./sfx/health.wav'))
-//         }
-        
-//         if (playerHealth >= 100) {
-//             playerHealth = 100
-//         }
-//     }
-// }
 
 function pickup(w) {
     for (let i=0; i < specialArray.length; i++) {

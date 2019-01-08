@@ -13,9 +13,8 @@ let specialArray = [];
 let bossArray = [];
 
 let playerHealth = 100
-let bossHealth = 500
+let bossHealth = 10000
 let score = 0
-let music
 let maxRadius = 40;
 let minRadius = 10;
 
@@ -23,6 +22,9 @@ let mouse = {
     x: undefined,
     y: undefined
 }
+
+let isRunning = true;
+let musicPlaying = true
 
 let colorArray = [
     '#242424',
@@ -39,10 +41,13 @@ let colorArray2 = [
     '#F9C73F'
 ]
 
+
 function animate() {
+      if (isRunning) {
     requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, innerWidth, innerHeight
-        );
+  }
+
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
         
     for (let i=0; i < enemyArray.length; i++) {
         enemyArray[i].update()
@@ -71,34 +76,32 @@ function animate() {
 
     scoreDisplay()
     healthDisplay()
-
+    // menu()
     
     if(playerHealth <= 0) {
        loseDisplay()
        playerHealth = 0
     }
     
-    if(bossHealth <= 0) {
+    if(bossHealth <= 0 && playerHealth > 0) {
        winDisplay()
        playerHealth = 100
     }
-    
 }
 
 function scoreDisplay() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText('Score: ' + score, innerWidth - 150, 30);    
+    ctx.fillText('Score: ' + score, innerWidth - 160, 30);    
 }
 
 function healthDisplay() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText('Health: ' + playerHealth, innerWidth - 150, 60);    
+    ctx.fillText('Health: ' + playerHealth, innerWidth - 160, 60);    
 }
 
 function loseDisplay() {
-    // console.log('game over')
     ctx.font = "40px Arial";
     ctx.fillStyle = "red";
     ctx.fillText('Game Over!', innerWidth / 2 - 100, innerHeight / 2); 
@@ -111,21 +114,58 @@ function winDisplay() {
 }
 
 function menu() {
-    ctx.fillStyle = 'grey';
-    ctx.fillRect(innerWidth/2, innerHeight/2, 400, 600);
+    ctx.fillStyle = 'rgba(40, 40, 40, 0.60)';
+    ctx.fillRect(innerWidth/2 / 2, innerHeight/2 / 2, 400, 400);
 }
 
-    music = document.createElement("audio");
-    music.src = './sfx/theme1.mp3'
-    // sound = document.getElementById("audio");
-    music.setAttribute("preload", "auto");
-    music.setAttribute("controls", "none");
-    music.style.display = "none";
-    music.loop = true
-    music.volume = 0.2
-    document.body.appendChild(music);
-    // music.play()
+window.addEventListener("keypress",
+    function(event) {
+        
+        if (event.keyCode == '109') {
+            console.log(event)
+            toggleMusic();
+            
+        }
+});
 
-// console.log(music)
+
+function togglePause() {
+  isRunning = !isRunning;
+
+  if (isRunning) {
+    animate();
+  }
+}
+
+window.addEventListener("keypress",
+    function(event) {
+        if (event.keyCode == '112') {
+            togglePause();
+        }
+});
 
 animate()
+// music()
+
+// function music() {
+//     music = document.createElement("audio");
+//     music.src = './sfx/theme1.mp3'
+//     // sound = document.getElementById("audio");
+//     music.setAttribute("preload", "auto");
+//     music.setAttribute("controls", "none");
+//     music.style.display = "none";
+//     music.loop = true
+//     music.volume = 0.2
+//     document.body.appendChild(music);
+    
+//     if (musicPlaying){
+//         music.play()
+//     } 
+    
+//     music.pause()
+// }
+
+// function toggleMusic() {
+//   musicPlaying = !musicPlaying;
+
+// }

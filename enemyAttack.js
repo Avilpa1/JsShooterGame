@@ -41,7 +41,6 @@ function removeEnemyFire() {
     for (let i=0; i < enemyWeaponArray.length; i++) {
         if(Math.floor(enemyWeaponArray[i].y) > innerHeight) {
             enemyWeaponArray.splice(i,1)
-            // console.log(enemyWeaponArray)
         }
     }
 }

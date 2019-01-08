@@ -31,9 +31,11 @@ function Boss(w, h, color, x, y, type, speed) {
             this.y += speed
             this.draw();
             
+            if (this.y < 10) {
+                bossHealth = 500
+        
+            } 
 
-            
-            // console.log(this.x)
             if (this.y >= 20) {
                 speed = 0
         
@@ -49,11 +51,8 @@ function Boss(w, h, color, x, y, type, speed) {
             
             this.x += dx
             
-
         }
     }
-
-let bossEnemyInterval
 
 let bossInterval = setInterval(function() {
     if (score == 5000) {
@@ -65,12 +64,12 @@ let bossInterval = setInterval(function() {
 }, 300)
 
 function spawnBoss() {
-    var raduis = 35//Math.random() * 3 + 1;
+    var raduis = 35
     let x = innerWidth/2 - 250 
     let y = -600
     let speed = Math.floor(Math.random() * 5) + 3
     console.log('boss')
-    bossArray.push(new Boss(500, 500, "./boss1.png", x, y, "image", speed));
+    bossArray.push(new Boss(500, 500, "./images/boss1.png", x, y, "image", speed));
     
     for (let i=0; i < bossArray.length; i++) {
     setInterval(function() {
@@ -97,7 +96,7 @@ function bossHit(w, index) {
             console.log('hit')
             // weaponArray.splice(0,1)
             new enemyExplosion("./sfx/enemyExplosion.wav")
-            // score += 100
+
             bossHealth -= 10
             
             if (bossHealth <= 0) {
@@ -176,23 +175,10 @@ function enemyFire(x, y) {
         enemyWeaponArray.push(new EnemyAttack(x, y, 1, 10))
 }
 
-
-// for (let i=0; i < bossArray.length; i++) {
-//     setInterval(function() {
-//         let x = bossArray[i].x + 30
-//         let y = bossArray[i].y + 30
-        
-//         // enemyWeaponArray.push(new EnemyAttack(x, y, 1, 10))
-//         console.log('test')
-//         enemyFire(x, y)
-//     }, 600)
-// }
-
 function removeEnemyFire() {
     for (let i=0; i < enemyWeaponArray.length; i++) {
         if(Math.floor(enemyWeaponArray[i].y) > innerHeight) {
             enemyWeaponArray.splice(i,1)
-            // console.log(enemyWeaponArray)
         }
     }
 }
@@ -203,12 +189,8 @@ function firstWave() {
     let x = Math.random() * (innerWidth - raduis * 2) + raduis;
     let y = -400//Math.random() * (innerHeight / 5 - raduis * 2) + raduis;;
     let speed = Math.floor(Math.random() * 5) + 3 * (i/3)
-    // let dx = (Math.random() - 0.5) * 1;
-    // let dy = (Math.random() - 0.5) * 1;
-
-    // enemyArray.push(new Enemy(60, 60, "https://i.pinimg.com/originals/0f/d0/5c/0fd05c35b97fa9d0c8f5d6ea010f1e82.png", x, y, "image", speed));
     
-    enemyArray.push(new Enemy(60, 60, "./enemy1.png", x, y, "image", speed));
+    enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed));
     }
 }
 
@@ -218,14 +200,14 @@ function bossAttackers() {
         
         if (bossHealth <= 0) {
             console.log('boss dead')
-            clearInterval(bossEnemyInterval)
+            bossEnemyIntervalClear()
             // allEnemyDead() 
         } else {
         
     weaponArray = [];
     enemyWeaponArray = [];
     // enemyArray = [];
-    debrisArray = [];
+    // debrisArray = [];
     
     for (let i=0; i < 15; i++) {
     var raduis = 35//Math.random() * 3 + 1;
@@ -234,15 +216,24 @@ function bossAttackers() {
     let speed = Math.floor(Math.random() * 5) + 3 * (i/3)
     // let dx = (Math.random() - 0.5) * 1;
     // let dy = (Math.random() - 0.5) * 1;
-
-    // enemyArray.push(new Enemy(60, 60, "https://i.pinimg.com/originals/0f/d0/5c/0fd05c35b97fa9d0c8f5d6ea010f1e82.png", x, y, "image", speed));
     
-    enemyArray.push(new Enemy(60, 60, "./enemy1.png", x, y, "image", speed));
+    enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed));
     }
 }
 }, 10000)
 
 }
+
+function bossEnemyIntervalClear() {
+    clearInterval(bossEnemyInterval)
+    console.log('interval Cleared')
+}
+
+
+
+
+
+
 
 
 // function allEnemyDead() {

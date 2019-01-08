@@ -4,16 +4,24 @@ window.addEventListener('click',
         mouse.y = event.y;
         weaponFire(mouse.x, mouse.y)
         new playerWeapon1("./sfx/iceball.wav");
-        
 })
 
+let mouseXcord = 0
+let mouseYcord = 0
+
+document.addEventListener('mousemove', function(e){
+    mouseXcord = e.pageX
+    mouseYcord = e.pageY;
+}, false);
 
 window.addEventListener("keypress",
-    function() {
-        mouse.x = window.event.pageX;
-        mouse.y = window.event.pageY;
-        weaponFire(mouse.x, mouse.y)
-        new playerWeapon1("./sfx/iceball.wav");
+    
+    function(event) {
+        if (event.keyCode == '32') {
+                weaponFire(mouseXcord, mouseYcord)
+                new playerWeapon1("./sfx/iceball.wav");
+        }
+
 });
 
 function weaponFire(x, y) {
@@ -33,8 +41,6 @@ function Weapon(x, y, w, h) {
         ctx.stroke();
         ctx.fillStyle = 'green'
         ctx.fill()
-
-        
     }
     
     this.update = function() {
@@ -47,7 +53,6 @@ function Weapon(x, y, w, h) {
                 bossHit(weaponArray[i], i)
                 pickup(weaponArray[i])
                 removeFire()
-
             }
         }
     }
@@ -88,7 +93,6 @@ function removeFire() {
     for (let i=0; i < weaponArray.length; i++) {
         if(Math.floor(weaponArray[i].y) <= 0) {
             weaponArray.splice(i,1)
-            // console.log(weaponArray)
         }
     }
 }
@@ -117,7 +121,6 @@ function enemyDestroyed(x, y, radius, dx, dy, color) {
         // this.y -= 5
         // this.x += 5
         this.draw();
-
     }
 }
 

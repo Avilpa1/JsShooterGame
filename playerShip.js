@@ -5,6 +5,7 @@ window.addEventListener('mousemove',
     
 })
 
+
 function Ship(width, height, color, x, y, type) {
     this.type = type;
     if (type == "image") {
@@ -39,19 +40,12 @@ function Ship(width, height, color, x, y, type) {
 
 
 function shipSpawn() {
-    let x = mouse.x//innerWidth / 2
-    let y = mouse.y//innerHeight - 200
+    let x = mouse.x
+    let y = mouse.y
 
-    // shipArray.push(new Ship(60, 60, "https://media.indiedb.com/images/games/1/68/67090/spaceship.1.png", x, y, "image"));
-    shipArray.push(new Ship(60, 82, "./playerShip2.png", x, y, "image"));
+    shipArray.push(new Ship(60, 82, "./images/playerShip2.png", x, y, "image"));
 }
 
-// for (let i=0; i < weaponArray.length; i++) {
-//     if(weaponArray[i].y <= 0) {
-//         // weaponArray.splice(i,1)
-//         damage(enemyWeaponArray[i])
-//     }
-// }
 
 function damage() {
 
@@ -100,7 +94,7 @@ function playerLose() {
     weaponArray = []
     let playerPosX = mouse.x
     let playerPosY = mouse.y
-    clearInterval(bossEnemyInterval)
+    bossEnemyIntervalntervalClear()
     
     for(let d=0; d < 20; d++) {
         let size = Math.floor(Math.random() * 3) + 1
