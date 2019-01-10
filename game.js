@@ -12,26 +12,26 @@ let debrisArray = [];
 let specialArray = [];
 let bossArray = [];
 
-let playerHealth = 100
-let bossHealth = 10000
-let score = 0
+let playerHealth = 100;
+let bossHealth = 10000;
+let score = 0;
 let maxRadius = 40;
 let minRadius = 10;
 
 let mouse = {
     x: undefined,
     y: undefined
-}
+};
 
 let isRunning = true;
-let musicPlaying = true
+let musicPlaying = true;
 
 let colorArray = [
     '#242424',
     '#363537',
     '#3D3D3D',
     '#595959',
-]
+];
 
 let colorArray2 = [
     '#A21212',
@@ -39,7 +39,7 @@ let colorArray2 = [
     '#FF4E41',
     '#FFE046',
     '#F9C73F'
-]
+];
 
 
 function animate() {
