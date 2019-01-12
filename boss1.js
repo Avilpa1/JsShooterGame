@@ -73,10 +73,12 @@ function spawnBoss() {
     
     for (let i=0; i < bossArray.length; i++) {
     setInterval(function() {
-        let x = bossArray[i].x
-        let y = bossArray[i].y + 50
-        enemyFire(x + 400, y)
-        enemyFire(x + 95, y)
+        if (bossArray[i]) {
+            let x = bossArray[i].x
+            let y = bossArray[i].y + 50
+            enemyFire(x + 400, y)
+            enemyFire(x + 95, y)
+        }
     }, 300)
 }
     firstWave()
@@ -85,22 +87,17 @@ function spawnBoss() {
 
 
 
-function bossHit(w, index) {
-    for (let i=0; i < bossArray.length; i++) {
-        let e = bossArray[i]
-// console.log(e)
-// console.log(index)
-        if(w.x > e.x && w.x < e.x + e.w) {
-
-        // if(m.x+m.w >= e.x && m.x <= e.x+e.w && m.y <= e.y && m.y <= e.y+e.h) {
+function bossHit(e, m, ei, mi) {
+    
+    if(m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
             console.log('hit')
-            // weaponArray.splice(0,1)
+            weaponArray.splice(mi,1)
             new enemyExplosion("./sfx/enemyExplosion.wav")
 
             bossHealth -= 10
             
             if (bossHealth <= 0) {
-                bossArray.splice([i],1)
+                bossArray.splice([ei],1)
                 score += 5000
                 
                 for(let d=0; d < 15; d++) {
@@ -146,7 +143,7 @@ function bossHit(w, index) {
             }
         }
     }
-}
+
 
 function BossAttack(x, y, w, h) {
     this.x = x;
@@ -194,9 +191,11 @@ function firstWave() {
     }
 }
 
+let bossEnemyInterval
+
 function bossAttackers() {
     
-    let bossEnemyInterval = setInterval(function(){
+    bossEnemyInterval = setInterval(function(){
         
         if (bossHealth <= 0) {
             console.log('boss dead')
@@ -209,7 +208,7 @@ function bossAttackers() {
     // enemyArray = [];
     // debrisArray = [];
     
-    for (let i=0; i < 15; i++) {
+    for (let i=0; i < 7; i++) {
     var raduis = 35//Math.random() * 3 + 1;
     let x = Math.random() * (innerWidth - raduis * 2) + raduis;
     let y = -400//Math.random() * (innerHeight / 5 - raduis * 2) + raduis;;

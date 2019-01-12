@@ -1,11 +1,11 @@
-function Special(width, height, color, x, y, type) {
+function Special(w, h, color, x, y, type) {
     this.type = type;
     if (type == "image") {
         this.image = new Image();
         this.image.src = color;
     }
-    this.width = width;
-    this.height = height;
+    this.w = w;
+    this.h = h;
     this.speedX = 0;
     this.speedY = 0;    
     this.x = x;
@@ -13,10 +13,10 @@ function Special(width, height, color, x, y, type) {
     
     this.draw = function() {
         if (type == "image") {
-            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+            ctx.drawImage(this.image, this.x, this.y, this.w, this.h);
         } else {
             ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.fillRect(this.x, this.y, this.w, this.h);
         }
     }
         this.update = function() {
@@ -40,21 +40,20 @@ let specialInterval = setInterval(function() {
 }, 20000)
 // }, 5000)
 
-function pickup(w) {
-    for (let i=0; i < specialArray.length; i++) {
-        let e = specialArray[i]
+function pickup(e, m, ei, mi) {
 
-        if(w.x > e.x && w.x < e.x + 50) {
-            new specialSound(('./sfx/health.wav'))
-            specialArray.splice(i,1)
-            playerHealth += 25
+    if(m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
+        new specialSound(('./sfx/health.wav'))
+        specialArray.splice(ei,1)
+        weaponArray.splice(mi,1)
+        playerHealth += 25
             
             if (playerHealth >= 100) {
                 playerHealth = 100
+                }
             }
         }
-    }
-}
+    
 
 function removeSpecial() {
     for (let i=0; i < specialArray.length; i++) {

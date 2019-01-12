@@ -31,9 +31,11 @@ function Ship(width, height, color, x, y, type) {
         }
     }
         this.update = function() {
- 
-            damage()
-            this.draw();
+        this.draw();
+            
+            if(playerHealth == 0) {
+                playerLose()
+            }
         }
 
     }
@@ -47,27 +49,22 @@ function shipSpawn() {
 }
 
 
-function damage() {
+function damage(m, mi) {
 
-        for (let i=0; i < enemyWeaponArray.length; i++) {
-        // console.log(enemyWeaponArray[i])
-        }
-    
-    for (let i=0; i < shipArray.length; i++) {
-        let e = shipArray[i]
-// console.log(e)
-// console.log(m)
-        // if(m.x > e.x && m.x < e.x + e.width) {
-        // // if(e.y > me.y && e.y < m.x + m.width) {
-        //     console.log('hit')
-        //     shipArray.splice([i],1)
-        //     playerHealth -= 10
-         
+            console.log('player hit')
+            enemyWeaponArray.splice(mi,1)
+            playerHealth -= 1
 
-            
-        // }
+             for(let d=0; d < 3; d++) {
+                let size = Math.floor(Math.random() * 1) + 1
+                let dx = (Math.random() - 0.5) * 20;
+                let dy = (Math.random() - 0.5) * 20;
+                let color = colorArray[Math.floor(Math.random()*colorArray.length)]
+                debrisArray.push(new enemyDestroyed(mouseXcord, mouseYcord , size, dx, dy, color))
+            }
+
     }
-}
+// }
 
 
             //  for(let d=0; d < 20; d++) {
@@ -94,7 +91,7 @@ function playerLose() {
     weaponArray = []
     let playerPosX = mouse.x
     let playerPosY = mouse.y
-    bossEnemyIntervalntervalClear()
+    // bossEnemyIntervalntervalClear()
     
     for(let d=0; d < 20; d++) {
         let size = Math.floor(Math.random() * 3) + 1

@@ -28,6 +28,7 @@ function weaponFire(x, y) {
         weaponArray.push(new Weapon(x, y, 1, 10))
 }
 
+
 function Weapon(x, y, w, h) {
     this.x = x;
     this.y = y;
@@ -47,46 +48,83 @@ function Weapon(x, y, w, h) {
         this.y -= 25
         this.draw();
 
-            for (let i=0; i < weaponArray.length; i++) {
-                if(weaponArray[i].y <= 0) {
-                weaponHit(weaponArray[i])
-                bossHit(weaponArray[i], i)
-                pickup(weaponArray[i])
-                removeFire()
-            }
+            
+        for (let ei=0; ei < enemyArray.length; ei++) {
+            let e = enemyArray[ei]
+            
+                for (let wi=0; wi < weaponArray.length; wi++) {
+                    let w = weaponArray[wi]
+                    
+                        weaponHit(e, w, ei, wi)
+                        removeFire()
+                }
         }
-    }
+                    
+        for (let si=0; si < specialArray.length; si++) {
+            let s = specialArray[si]
+            
+                for (let wi=0; wi < weaponArray.length; wi++) {
+                    let w = weaponArray[wi]
+                    
+                        pickup(s, w, si, wi)
+                }            
+        }
+        
+        for (let bi=0; bi < bossArray.length; bi++) {
+            let b = bossArray[bi]
+            
+                for (let wi=0; wi < weaponArray.length; wi++) {
+                    let w = weaponArray[wi]
+                    
+                        bossHit(b, w, bi, wi)
+                }            
+        }
+                    
+                    
+                    
+                    
+                    
+                    
+                                            
+
+    }        
 }
 
 
-function weaponHit(w) {
-    for (let i=0; i < enemyArray.length; i++) {
-        let e = enemyArray[i]
-// console.log(e)
-// console.log(m)
-        if(w.x > e.x && w.x < e.x + e.w) {
-            console.log('hit')
-            enemyArray.splice([i],1)
-            new enemyExplosion("./sfx/enemyExplosion.wav")
-            score += 100
-    
-             for(let d=0; d < 20; d++) {
-                let size = Math.floor(Math.random() * 3) + 1
-                let dx = (Math.random() - 0.5) * 20;
-                let dy = (Math.random() - 0.5) * 20;
-                let color = colorArray[Math.floor(Math.random()*colorArray.length)]
-                debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
-            }
-            
-            for(let d=0; d < 20; d++) {
-                let size = Math.floor(Math.random() * 1) + 1
-                let dx = (Math.random() - 0.5) * 30;
-                let dy = (Math.random() - 0.5) * 30;
-                let color = colorArray2[Math.floor(Math.random()*colorArray.length)]
-                debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
-            }
+
+
+                        // console.log('Enemy - ' + Math.floor(e.x) + ' ' + e.y + ' ' + e.h + ' ' + e.w)
+                        // console.log('Weapon - ' + m.x + ' ' + m.y + ' ' + m.h + ' ' + m.w)
+
+
+
+function weaponHit(e, m, ei, mi) {
+
+    if(m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
+
+        console.log('hit')
+        enemyArray.splice(ei,1)
+        weaponArray.splice(mi,1)
+        new enemyExplosion("./sfx/enemyExplosion.wav")
+        score += 100
+
+         for(let d=0; d < 20; d++) {
+            let size = Math.floor(Math.random() * 3) + 1
+            let dx = (Math.random() - 0.5) * 20;
+            let dy = (Math.random() - 0.5) * 20;
+            let color = colorArray[Math.floor(Math.random()*colorArray.length)]
+            debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
+        }
+        
+        for(let d=0; d < 20; d++) {
+            let size = Math.floor(Math.random() * 1) + 1
+            let dx = (Math.random() - 0.5) * 30;
+            let dy = (Math.random() - 0.5) * 30;
+            let color = colorArray2[Math.floor(Math.random()*colorArray.length)]
+            debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
         }
     }
+
 }
 
 function removeFire() {

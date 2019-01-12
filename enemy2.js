@@ -10,7 +10,7 @@ function Enemy2(w, h, color, x, y, type, speed) {
     this.x = x;
     this.y = y;
     
-    let dx = 4
+    dx = 4
     this.startPos = x 
     
     this.draw = function() {
@@ -19,10 +19,10 @@ function Enemy2(w, h, color, x, y, type, speed) {
                 this.x, 
                 this.y,
                 this.w, this.h);
-            ctx.drawImage(this.image, 
-                this.x, 
-                this.y,
-                this.w, this.h);
+            // ctx.drawImage(this.image, 
+            //     this.x, 
+            //     this.y,
+            //     this.w, this.h);
         } else {
             ctx.fillStyle = color;
             ctx.fillRect(this.x, this.y, this.w, this.h);
@@ -32,7 +32,7 @@ function Enemy2(w, h, color, x, y, type, speed) {
             this.y += speed
             this.draw();
             resetEnemies()
-            
+            // enemyMove()
         if ( this.x + dx > this.startPos ) {
                 dx = -dx
             }
@@ -50,27 +50,36 @@ for (let i=0; i < 1; i++) {
     let y = -100
     let speed = Math.floor(Math.random() * 5) + 1
     
-    enemyArray.push(new Enemy2(60, 60, "./images/enemy1.png", x, y, "image", speed));
-    enemyArray.push(new Enemy2(60, 60, "./images/enemy1.png", x+30, y+60, "image", speed));
-    enemyArray.push(new Enemy2(60, 60, "./images/enemy1.png", x, y+120, "image", speed));
-    enemyArray.push(new Enemy2(60, 60, "./images/enemy1.png", x+30, y+180, "image", speed));
+    // enemyArray.push(new Enemy2(60, 60, "./images/enemy1.png", x, y, "image", speed));
+    // enemyArray.push(new Enemy2(60, 60, "./images/enemy1.png", x+30, y+60, "image", speed));
+    // enemyArray.push(new Enemy2(60, 60, "./images/enemy1.png", x, y+120, "image", speed));
+    // enemyArray.push(new Enemy2(60, 60, "./images/enemy1.png", x+30, y+180, "image", speed));
 }
 
-function resetEnemies() {
-    for (let i=0; i < enemyArray.length; i++) {
-        if(enemyArray[i].y > innerHeight) {
-            enemyArray[i].y = -300
-            // enemyArray[i].x = Math.random() * (innerWidth - raduis * 2) + raduis;
-            enemyArray[i].speed = Math.floor(Math.random() * 5) + 3
+// function resetEnemies() {
+//     for (let i=0; i < enemyArray.length; i++) {
+//         if(enemyArray[i].y > innerHeight) {
+//             enemyArray[i].y = -300
+//             // enemyArray[i].x = Math.random() * (innerWidth - raduis * 2) + raduis;
+//             enemyArray[i].speed = Math.floor(Math.random() * 5) + 3
             
-            playerHealth -= 5
-            
-            if(playerHealth == 0) {
-                playerLose()
-            }
-        }
-    }
-}
+//         }
+//     }
+// }
+
+// function enemyMove() {
+//     for (let i=0; i < enemyArray.length; i++) {
+        
+//                 if ( enemyArray[i].x + enemyArray[i].dx > enemyArray[i].startPos ) {
+//                     enemyArray[i].dx = -this.dx
+//                     console.log(i)
+//                 }
+//                 // if (this.x + dx < this.startPos - 100 ) {
+//                 //     dx = +4
+//                 // }
+                
+//         }
+// }
 
 // let enemyInterval = setInterval(function(){
 //     weaponArray = [];

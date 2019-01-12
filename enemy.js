@@ -45,30 +45,25 @@ function resetEnemies() {
             enemyArray[i].y = -300
             enemyArray[i].x = Math.random() * (innerWidth - raduis * 2) + raduis;
             enemyArray[i].speed = Math.floor(Math.random() * 5) + 3
-            
-            playerHealth -= 5
-            
-            if(playerHealth == 0) {
-                playerLose()
-            }
+    
         }
     }
 }
 
 let enemyInterval = setInterval(function(){
-    weaponArray = [];
-    enemyWeaponArray = [];
-    enemyArray = [];
-    debrisArray = [];
-    
-    for (let i=0; i < 10; i++) {
-    var raduis = 35
-    let x = Math.random() * (innerWidth - raduis * 2) + raduis;
-    let y = -400
-    let speed = Math.floor(Math.random() * 5) + 3 * (i/3)
-    
-    enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed));
-}
+            weaponArray = [];
+            // enemyWeaponArray = [];
+            // enemyArray = [];
+            debrisArray = [];
+            
+            for (let i=0; i < 10; i++) {
+            var raduis = 35
+            let x = Math.random() * (innerWidth - raduis * 2) + raduis;
+            let y = -400
+            let speed = Math.floor(Math.random() * 5) + 3 * (i/3)
+            
+            enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed));
+    }
 }, 15000)
 
 
