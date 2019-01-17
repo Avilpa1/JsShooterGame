@@ -10,10 +10,16 @@ let shipArray = [];
 let enemyArray = [];
 let debrisArray = [];
 let specialArray = [];
+let shieldArray = [];
+let shieldArrayDisplay = [];
+let missileArray = [];
 let bossArray = [];
+let asteroidArray = [];
 
 let playerHealth = 100;
-let bossHealth = 10000;
+let bossHealth = 5000;
+let shieldPower = 100;
+let missileQty = 5;
 let score = 0;
 let maxRadius = 40;
 let minRadius = 10;
@@ -41,11 +47,39 @@ let colorArray2 = [
     '#F9C73F'
 ];
 
+// Options
+const outputEl = document.getElementById('fps-output');
+const decimalPlaces = 2;
+const updateEachSecond = 1;
+
+// Cache values
+const decimalPlacesRatio = Math.pow(10, decimalPlaces);
+let   timeMeasurements = [];
+
+// Final output
+let fps = 0;
+
+const tick = function() {
+  timeMeasurements.push(performance.now());
+  
+  const msPassed = timeMeasurements[timeMeasurements.length - 1] - timeMeasurements[0];
+  
+  if (msPassed >= updateEachSecond * 1000) {
+    fps = Math.round(timeMeasurements.length / msPassed * 1000 * decimalPlacesRatio) / decimalPlacesRatio;
+    timeMeasurements = [];
+  }
+
+//   outputEl.innerText = fps;
+
+//   requestAnimationFrame(() => {
+//     tick();
+//   });
+}
 
 function animate() {
-      if (isRunning) {
-    requestAnimationFrame(animate);
-  }
+    if (isRunning) {
+        requestAnimationFrame(animate);
+    }
 
     ctx.clearRect(0, 0, innerWidth, innerHeight);
         
@@ -73,9 +107,24 @@ function animate() {
         for (let i=0; i < bossArray.length; i++) {
         bossArray[i].update()
     }
+        for (let i=0; i < shieldArray.length; i++) {
+        shieldArray[i].update()
+    }
+        for (let i=0; i < missileArray.length; i++) {
+        missileArray[i].update()
+    }
+        for (let i=0; i < shieldArrayDisplay.length; i++) {
+        shieldArrayDisplay[i].update()
+    }
+        for (let i=0; i < asteroidArray.length; i++) {
+        asteroidArray[i].update()
+    }
 
     scoreDisplay()
     healthDisplay()
+    shieldDisplay()
+    missileDisplay()
+    tick()
     // menu()
     
     if(playerHealth <= 0) {
@@ -87,18 +136,38 @@ function animate() {
        winDisplay()
        playerHealth = 100
     }
+    
+    if (isRunning == false) {
+        pauseDisplay()
+    }
 }
 
 function scoreDisplay() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText('Score: ' + score, innerWidth - 160, 30);    
+    ctx.fillText('Score: ' + score, innerWidth - 160, 30);   
+    
+    ctx.font = "17px Arial";
+    ctx.fillText('FPS: ' + fps, 10, 30);  
 }
 
 function healthDisplay() {
     ctx.font = "25px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText('Health: ' + playerHealth, innerWidth - 160, 60);    
+    ctx.fillText('Health: ' + playerHealth, innerWidth - 160, 60);  
+    // ctx.drawImage("./images/enemy1.png", innerWidth - 160, 60, 30, 30);
+}
+
+function shieldDisplay() {
+    ctx.font = "25px Arial";
+    ctx.fillStyle = "red";
+    ctx.fillText('Shield: ' + shieldPower, innerWidth - 160, 90);    
+}
+
+function missileDisplay() {
+    ctx.font = "25px Arial";
+    ctx.fillStyle = "red";
+    ctx.fillText('Missiles: ' + missileQty, innerWidth - 160, 120);    
 }
 
 function loseDisplay() {
@@ -111,6 +180,12 @@ function winDisplay() {
     ctx.font = "40px Arial";
     ctx.fillStyle = "red";
     ctx.fillText('You win!!!', innerWidth / 2 - 100, innerHeight / 2); 
+}
+
+function pauseDisplay() {
+    ctx.font = "40px Arial";
+    ctx.fillStyle = "red";
+    ctx.fillText('Game Paused', innerWidth / 2 - 100, innerHeight / 2); 
 }
 
 function menu() {
@@ -169,3 +244,7 @@ animate()
 //   musicPlaying = !musicPlaying;
 
 // }
+
+
+
+tick();

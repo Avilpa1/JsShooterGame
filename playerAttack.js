@@ -25,23 +25,32 @@ window.addEventListener("keypress",
 });
 
 function weaponFire(x, y) {
-        weaponArray.push(new Weapon(x, y, 1, 10))
+        // weaponArray.push(new Weapon(x, y, 1, 10))
+        weaponArray.push(new Weapon(12, 49, "./images/bullet1.png", x, y, "image"));
 }
 
 
-function Weapon(x, y, w, h) {
-    this.x = x;
-    this.y = y;
+// function Weapon(x, y, w, h) {
+function Weapon(w, h, color, x, y, type) {
+    this.type = type;
+    if (type == "image") {
+        this.image = new Image();
+        this.image.src = color;
+    }
     this.w = w;
     this.h = h;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x = x;
+    this.y = y;
     
     this.draw = function() {
-        ctx.beginPath()
-        ctx.rect(this.x, this.y, this.w, this.h)
-        ctx.strokeStyle = 'green';
-        ctx.stroke();
-        ctx.fillStyle = 'green'
-        ctx.fill()
+        if (type == "image") {
+            ctx.drawImage(this.image, this.x - 5, this.y, this.w, this.h);
+        } else {
+            ctx.fillStyle = color;
+            ctx.fillRect(this.x, this.y, this.w, this.h);
+        }
     }
     
     this.update = function() {
@@ -66,7 +75,7 @@ function Weapon(x, y, w, h) {
                 for (let wi=0; wi < weaponArray.length; wi++) {
                     let w = weaponArray[wi]
                     
-                        pickup(s, w, si, wi)
+                        healthPickup(s, w, si, wi)
                 }            
         }
         
@@ -79,14 +88,16 @@ function Weapon(x, y, w, h) {
                         bossHit(b, w, bi, wi)
                 }            
         }
+        
+        for (let si=0; si < shieldArray.length; si++) {
+            let s = shieldArray[si]
+            
+                for (let wi=0; wi < weaponArray.length; wi++) {
+                    let w = weaponArray[wi]
                     
-                    
-                    
-                    
-                    
-                    
-                                            
-
+                        shieldPickup(s, w, si, wi)
+            }            
+        }
     }        
 }
 
@@ -108,7 +119,7 @@ function weaponHit(e, m, ei, mi) {
         new enemyExplosion("./sfx/enemyExplosion.wav")
         score += 100
 
-         for(let d=0; d < 20; d++) {
+         for(let d=0; d < 15; d++) {
             let size = Math.floor(Math.random() * 3) + 1
             let dx = (Math.random() - 0.5) * 20;
             let dy = (Math.random() - 0.5) * 20;
@@ -116,7 +127,7 @@ function weaponHit(e, m, ei, mi) {
             debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
         }
         
-        for(let d=0; d < 20; d++) {
+        for(let d=0; d < 15; d++) {
             let size = Math.floor(Math.random() * 1) + 1
             let dx = (Math.random() - 0.5) * 30;
             let dy = (Math.random() - 0.5) * 30;
@@ -124,12 +135,11 @@ function weaponHit(e, m, ei, mi) {
             debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
         }
     }
-
 }
 
 function removeFire() {
     for (let i=0; i < weaponArray.length; i++) {
-        if(Math.floor(weaponArray[i].y) <= 0) {
+        if(Math.floor(weaponArray[i].y) <= -50) {
             weaponArray.splice(i,1)
         }
     }

@@ -22,6 +22,13 @@ function Ship(width, height, color, x, y, type) {
     this.draw = function() {
         if (type == "image") {
             ctx.drawImage(this.image, mouse.x - 30, mouse.y, this.width, this.height);
+            
+            // ctx.arc(mouse.x,  mouse.y + 40, 45, Math.PI, 0 , false)
+            // ctx.strokeStyle = 'rgba(107, 161, 255, 0.2)';
+            // ctx.stroke();
+            // ctx.fillStyle = 'rgba(107, 161, 255, 0.2)'
+            // ctx.fill()
+            
             // if (mouse.x <= 300) {
             //     console.log('test')
             //     this.image.src = './playerShip2.png'
@@ -50,21 +57,45 @@ function shipSpawn() {
 
 
 function damage(m, mi) {
-
-            console.log('player hit')
-            enemyWeaponArray.splice(mi,1)
+    // console.log('player hit')
+    enemyWeaponArray.splice(mi,1)
+    
+        if (shieldPower > 0) {
+            shieldPower -= 5
+            shieldHit()
+            
+        } else {
+    
             playerHealth -= 1
-
-             for(let d=0; d < 3; d++) {
-                let size = Math.floor(Math.random() * 1) + 1
-                let dx = (Math.random() - 0.5) * 20;
-                let dy = (Math.random() - 0.5) * 20;
-                let color = colorArray[Math.floor(Math.random()*colorArray.length)]
-                debrisArray.push(new enemyDestroyed(mouseXcord, mouseYcord , size, dx, dy, color))
-            }
-
+        
+         for(let d=0; d < 3; d++) {
+            let size = Math.floor(Math.random() * 1) + 1
+            let dx = (Math.random() - 0.5) * 20;
+            let dy = (Math.random() - 0.5) * 20;
+            let color = colorArray[Math.floor(Math.random()*colorArray.length)]
+            debrisArray.push(new enemyDestroyed(mouseXcord, mouseYcord , size, dx, dy, color))
+        }
     }
-// }
+
+}
+
+
+function shieldHit() {
+    // shieldArrayDisplay.splice(1,1)
+    let raduis = 45
+    
+    shieldArrayDisplay.push(new Ship(60, 82, "./images/ship_shield.png", mouseXcord, mouseYcord, "image"));
+    // ctx.arc(mouseXcord, mouseYcord + 40, raduis, Math.PI*2, false)
+    ctx.fillStyle = 'rgba(107, 161, 255, 0.2)'
+    ctx.fill()
+    
+    setTimeout(function() {
+        shieldArrayDisplay.splice(0,1)
+        
+    },800)
+        
+        
+}
 
 
             //  for(let d=0; d < 20; d++) {

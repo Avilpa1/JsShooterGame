@@ -51,20 +51,17 @@ function resetEnemies() {
 }
 
 let enemyInterval = setInterval(function(){
-            weaponArray = [];
-            // enemyWeaponArray = [];
-            // enemyArray = [];
-            debrisArray = [];
-            
-            for (let i=0; i < 10; i++) {
-            var raduis = 35
-            let x = Math.random() * (innerWidth - raduis * 2) + raduis;
-            let y = -400
-            let speed = Math.floor(Math.random() * 5) + 3 * (i/3)
-            
-            enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed));
+    if(enemyArray === undefined || enemyArray.length == 0) {
+        for (let i=0; i < 10; i++) {
+        var raduis = 35
+        let x = Math.random() * (innerWidth - raduis * 2) + raduis;
+        let y = -400
+        let speed = Math.floor((Math.random() * 10) + 3);
+        
+        enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed));
+        }
     }
-}, 15000)
+}, 10000)
 
 
 

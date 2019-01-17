@@ -23,7 +23,7 @@ function Stars(x, y, radius) {
     }
 }
 
-for (let i=0; i < 150; i++) {
+for (let i=0; i < 20; i++) {
     var radius = 1
     let x = Math.random() * innerWidth;
     let y = Math.random() * innerHeight;
@@ -54,7 +54,7 @@ function Stars2(x, y, radius) {
     }
 }
 
-for (let i=0; i < 25; i++) {
+for (let i=0; i < 20; i++) {
     var radius = 1
     let x = Math.random() * innerWidth;
     let y = Math.random() * innerHeight;
@@ -85,7 +85,7 @@ function Stars3(x, y, radius) {
     }
 }
 
-for (let i=0; i < 25; i++) {
+for (let i=0; i < 20; i++) {
     var radius = 1
     let x = Math.random() * innerWidth;
     let y = Math.random() * innerHeight;
@@ -117,7 +117,7 @@ function Stars4(x, y, radius) {
     }
 }
 
-for (let i=0; i < 25; i++) {
+for (let i=0; i < 20; i++) {
     var radius = 1
     let x = Math.random() * innerWidth;
     let y = Math.random() * innerHeight;
