@@ -212,7 +212,7 @@ function bossAttackers() {
                             var raduis = 35//Math.random() * 3 + 1;
                             let x = Math.random() * (innerWidth - raduis * 2) + raduis;
                             let y = -400//Math.random() * (innerHeight / 5 - raduis * 2) + raduis;;
-                            let speed = Math.floor((Math.random() * 15) + 3);
+                            let speed = Math.floor((Math.random() * 7) + 3);
                             let dx = (Math.random() - 0.5) * 1;
                             let dy = (Math.random() - 0.5) * 1;
                             

@@ -34,10 +34,9 @@ function Asteroid(w, h, color, x, y, type, speed, dx, dy, radius) {
             this.y += speed
             this.draw();
             
-        // if (this.x >= innerWidth || this.x <= 0) {
-        //     this.dx = -this.dx;
-        //     this.x = -this.x;
-        // }
+        if ( this.y <= -300) {
+            this.dy = -this.dy
+        }
         
         if (this.y > innerHeight + 200) {
             this.y = -300
@@ -71,6 +70,17 @@ function Asteroid(w, h, color, x, y, type, speed, dx, dy, radius) {
                         let w = asteroidArray[wi]
                         
                             // asteroidCollide(e, w, ei, wi)
+                    }
+            }
+            
+        // Collision detection between player and asteroids.
+            for (let ei=0; ei < asteroidArray.length; ei++) {
+                let e = asteroidArray[ei]
+                
+                    for (let wi=0; wi < shipArray.length; wi++) {
+                        let w = shipArray[wi]
+                        
+                            playerCollide(e, w, ei, wi)
                     }
             }
     }
@@ -199,6 +209,16 @@ function asteroidHit(e, m, ei, mi) {
                 debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
             }
         }
+    }
+}
+
+function playerCollide(e, m, ei, mi) {
+    
+    m.x = mouse.x
+    m.y = mouse.y
+
+    if (m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
+        playerLose()
     }
 }
 

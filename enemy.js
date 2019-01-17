@@ -1,4 +1,4 @@
-function Enemy(w, h, color, x, y, type, speed) {
+function Enemy(w, h, color, x, y, type, speed, dx, dy) {
     this.type = type;
     if (type == "image") {
         this.image = new Image();
@@ -9,6 +9,8 @@ function Enemy(w, h, color, x, y, type, speed) {
     this.speed = 0;
     this.x = x;
     this.y = y;
+    this.dx = dx;
+    this.dy = dy;
     
 
     
@@ -25,6 +27,8 @@ function Enemy(w, h, color, x, y, type, speed) {
     }
         this.update = function() {
             this.y += speed
+            this.x += this.dx
+            this.y += this.dy
             this.draw();
             resetEnemies()
         }
@@ -35,8 +39,10 @@ for (let i=0; i < 10; i++) {
     let x = Math.random() * (innerWidth - raduis * 2) + raduis;
     let y = -100
     let speed = Math.floor(Math.random() * 5) + 3
+    let dx = (Math.random() - 1) * 2;
+    let dy = 0//(Math.random() - 0.5) * 10;
     
-    enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed));
+    enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed, dx, dy));
 }
 
 function resetEnemies() {
@@ -56,9 +62,11 @@ let enemyInterval = setInterval(function(){
         var raduis = 35
         let x = Math.random() * (innerWidth - raduis * 2) + raduis;
         let y = -400
-        let speed = Math.floor((Math.random() * 10) + 3);
+        let speed = Math.floor((Math.random() * 7) + 5);
+        let dx = (Math.random() - 0.5) * 5;
+        let dy = 0//(Math.random() - 0.5) * 10;
         
-        enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed));
+        enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed, dx, dy));
         }
     }
 }, 10000)

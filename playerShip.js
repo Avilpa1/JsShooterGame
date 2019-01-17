@@ -6,14 +6,14 @@ window.addEventListener('mousemove',
 })
 
 
-function Ship(width, height, color, x, y, type) {
+function Ship(w, h, color, x, y, type) {
     this.type = type;
     if (type == "image") {
         this.image = new Image();
         this.image.src = color;
     }
-    this.width = width;
-    this.height = height;
+    this.w = w;
+    this.h = h;
     this.speedX = 0;
     this.speedY = 0;    
     this.x = x;
@@ -21,7 +21,7 @@ function Ship(width, height, color, x, y, type) {
     
     this.draw = function() {
         if (type == "image") {
-            ctx.drawImage(this.image, mouse.x - 30, mouse.y, this.width, this.height);
+            ctx.drawImage(this.image, mouse.x - 30, mouse.y, this.w, this.h);
             
             // ctx.arc(mouse.x,  mouse.y + 40, 45, Math.PI, 0 , false)
             // ctx.strokeStyle = 'rgba(107, 161, 255, 0.2)';
@@ -57,7 +57,7 @@ function shipSpawn() {
 
 
 function damage(m, mi) {
-    // console.log('player hit')
+    console.log('player hit')
     enemyWeaponArray.splice(mi,1)
     
         if (shieldPower > 0) {
@@ -66,7 +66,7 @@ function damage(m, mi) {
             
         } else {
     
-            playerHealth -= 1
+            playerHealth -= 2
         
          for(let d=0; d < 3; d++) {
             let size = Math.floor(Math.random() * 1) + 1
@@ -120,6 +120,10 @@ function playerLose() {
     new playerExplosion('./sfx/playerExplosion.mp3')
     shipArray = []
     weaponArray = []
+    shieldArrayDisplay = []
+    shieldPower = 0
+    playerHealth = 0
+    
     let playerPosX = mouse.x
     let playerPosY = mouse.y
     // bossEnemyIntervalntervalClear()
