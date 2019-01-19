@@ -31,7 +31,7 @@ function Special(w, h, color, x, y, type) {
 
 let specialInterval = setInterval(function() {
     if(isRunning == true) {
-        console.log('Health')
+        // console.log('Health')
         
         let x = innerWidth + 300 
         let y = Math.random() * (innerHeight/2);
@@ -60,7 +60,7 @@ function healthPickup(e, m, ei, mi) {
 
 let shieldInterval = setInterval(function() {
     if(isRunning == true) {
-        console.log('shield')
+        // console.log('shield')
         
         let x = innerWidth + 300 
         let y = Math.random() * (innerHeight/2);

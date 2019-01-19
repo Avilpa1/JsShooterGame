@@ -7,11 +7,9 @@ window.addEventListener('mousemove',
 
 
 function Ship(w, h, color, x, y, type) {
-    this.type = type;
-    if (type == "image") {
-        this.image = new Image();
-        this.image.src = color;
-    }
+    this.image = new Image();
+    this.image.src = color;
+
     this.w = w;
     this.h = h;
     this.speedX = 0;
@@ -20,7 +18,6 @@ function Ship(w, h, color, x, y, type) {
     this.y = y;
     
     this.draw = function() {
-        if (type == "image") {
             ctx.drawImage(this.image, mouse.x - 30, mouse.y, this.w, this.h);
             
             // ctx.arc(mouse.x,  mouse.y + 40, 45, Math.PI, 0 , false)
@@ -35,7 +32,7 @@ function Ship(w, h, color, x, y, type) {
             // } else {
             //     this.image.src = color
             // }
-        }
+
     }
         this.update = function() {
         this.draw();
@@ -43,6 +40,7 @@ function Ship(w, h, color, x, y, type) {
             if(playerHealth == 0) {
                 playerLose()
             }
+            
         }
 
     }
@@ -57,7 +55,6 @@ function shipSpawn() {
 
 
 function damage(m, mi) {
-    console.log('player hit')
     enemyWeaponArray.splice(mi,1)
     
         if (shieldPower > 0) {
@@ -81,7 +78,7 @@ function damage(m, mi) {
 
 
 function shieldHit() {
-    // shieldArrayDisplay.splice(1,1)
+    shieldHitSound.play()
     let raduis = 45
     
     shieldArrayDisplay.push(new Ship(60, 82, "./images/ship_shield.png", mouseXcord, mouseYcord, "image"));
@@ -115,9 +112,8 @@ function shieldHit() {
             // }
             
             
-            
 function playerLose() {
-    new playerExplosion('./sfx/playerExplosion.mp3')
+    playerExplosionSound.play()
     shipArray = []
     weaponArray = []
     shieldArrayDisplay = []
@@ -154,6 +150,8 @@ function playerLose() {
             
 }
 
+playerExplosionSound = new playerExplosion('./sfx/playerExplosion.mp3')  
+
 function playerExplosion(src) {
     this.sound = document.createElement("audio");
     this.sound.src = src;
@@ -161,15 +159,33 @@ function playerExplosion(src) {
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
     document.body.appendChild(this.sound);
-    // this.play = function(){
+    
+    this.play = function(){
         this.sound.play();
-    //     playerSound = ''
-    // }
+        playerSound = ''
+    }
     // this.stop = function(){
     //     this.sound.pause();
     // }    
 }
 
+shieldHitSound = new sHitSound('./sfx/snd_shield.wav')  
 
+function sHitSound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    
+    this.play = function(){
+        this.sound.play();
+        playerSound = ''
+    }
+    // this.stop = function(){
+    //     this.sound.pause();
+    // }    
+}
 
 shipSpawn()

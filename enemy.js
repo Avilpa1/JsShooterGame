@@ -69,7 +69,7 @@ let enemyInterval = setInterval(function(){
         enemyArray.push(new Enemy(60, 60, "./images/enemy1.png", x, y, "image", speed, dx, dy));
         }
     }
-}, 10000)
+}, 5000)
 
 
 

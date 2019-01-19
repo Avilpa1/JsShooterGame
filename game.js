@@ -15,6 +15,7 @@ let shieldArrayDisplay = [];
 let missileArray = [];
 let bossArray = [];
 let asteroidArray = [];
+let bkArray = [];
 
 let playerHealth = 100;
 let bossHealth = 5000;
@@ -76,6 +77,7 @@ const tick = function() {
 //   });
 }
 
+
 function animate() {
     if (isRunning) {
         requestAnimationFrame(animate);
@@ -119,6 +121,10 @@ function animate() {
         for (let i=0; i < asteroidArray.length; i++) {
         asteroidArray[i].update()
     }
+        for (let i=0; i < bkArray.length; i++) {
+        bkArray[i].update()
+    }
+    
 
     scoreDisplay()
     healthDisplay()
@@ -179,7 +185,7 @@ function loseDisplay() {
 function winDisplay() {
     ctx.font = "40px Arial";
     ctx.fillStyle = "red";
-    ctx.fillText('You win!!!', innerWidth / 2 - 100, innerHeight / 2); 
+    ctx.fillText('Level Clear', innerWidth / 2 - 100, innerHeight / 2); 
 }
 
 function pauseDisplay() {
@@ -193,17 +199,6 @@ function menu() {
     ctx.fillRect(innerWidth/2 / 2, innerHeight/2 / 2, 400, 400);
 }
 
-window.addEventListener("keypress",
-    function(event) {
-        
-        if (event.keyCode == '109') {
-            console.log(event)
-            toggleMusic();
-            
-        }
-});
-
-
 function togglePause() {
   isRunning = !isRunning;
 
@@ -212,39 +207,68 @@ function togglePause() {
   }
 }
 
+function toggleMusic() {
+    if (running) {
+        running = false
+        playMusic.stop()
+    } else {
+        running = true
+        playMusic.play()
+    }
+}
+
 window.addEventListener("keypress",
     function(event) {
         if (event.keyCode == '112') {
             togglePause();
+            toggleMusic()
         }
 });
 
+let running = true
+
+window.addEventListener("keypress",
+    function(event) {
+        if (event.keyCode == '109') {
+            toggleMusic()
+        }
+});
+
+
+let playMusic = new music('./sfx/theme1.mp3')  
+
+function music(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    this.sound.loop = true
+    this.sound.volume = 0.2
+    document.body.appendChild(this.sound);
+    
+    this.play = function(){
+        this.sound.play();
+        playerSound = ''
+    }
+    this.stop = function(){
+        this.sound.pause();
+    }    
+}
+
+function bgChange() {
+    let getCanvas = document.getElementById('canvasId')
+    let num = Math.floor((Math.random() * 6) + 1)
+    let bgURL = "url(./images/bg_space0" + num + ".png)"
+    
+    getCanvas.style.background = bgURL
+    getCanvas.style.backgroundRepeat = "no-repeat"
+    getCanvas.style.backgroundPosition = "center" 
+    getCanvas.style.backgroundSize = "cover"
+}
+
+
 animate()
-// music()
-
-// function music() {
-//     music = document.createElement("audio");
-//     music.src = './sfx/theme1.mp3'
-//     // sound = document.getElementById("audio");
-//     music.setAttribute("preload", "auto");
-//     music.setAttribute("controls", "none");
-//     music.style.display = "none";
-//     music.loop = true
-//     music.volume = 0.2
-//     document.body.appendChild(music);
-    
-//     if (musicPlaying){
-//         music.play()
-//     } 
-    
-//     music.pause()
-// }
-
-// function toggleMusic() {
-//   musicPlaying = !musicPlaying;
-
-// }
-
-
-
 tick();
+playMusic.play()
+bgChange()

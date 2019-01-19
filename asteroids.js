@@ -1,9 +1,8 @@
 function Asteroid(w, h, color, x, y, type, speed, dx, dy, radius) {
-    this.type = type;
-    if (type == "image") {
-        this.image = new Image();
-        this.image.src = color;
-    }
+
+    this.image = new Image();
+    this.image.src = color;
+
     this.w = w;
     this.h = h;
     this.speed = 0;
@@ -16,38 +15,26 @@ function Asteroid(w, h, color, x, y, type, speed, dx, dy, radius) {
 
     
     this.draw = function() {
-        if (type == "image") {
-        ctx.save();
-        // ctx.translate(0, 0);        
-        // ctx.rotate(this.angle);
-            ctx.drawImage(this.image, 
-                this.x, 
-                this.y,
-                this.w, this.h);
-        // ctx.restore();         
-        } else {
-            ctx.fillStyle = color;
-            ctx.fillRect(this.x, this.y, this.w, this.h);
-        }
+        ctx.drawImage(this.image, this.x, this.y, this.w, this.h);      
     }
+    
         this.update = function() {
             this.y += speed
             this.draw();
+
             
-        if ( this.y <= -300) {
-            this.dy = -this.dy
-        }
-        
-        if (this.y > innerHeight + 200) {
-            this.y = -300
-            this.x = Math.random() * (innerWidth - raduis * 2) + raduis;
-            this.speed = Math.floor(Math.random() * 5) + 3
-        }
-        
-        this.x += this.dx
-        this.y += this.dy
+            if ( this.y <= -300) {
+                this.dy = -this.dy/4
+            }
             
-        this.angle += 1 * Math.PI / 180; 
+            if (this.y > innerHeight + 200) {
+                this.y = -300
+                this.x = Math.random() * (innerWidth - raduis * 2) + raduis;
+                this.speed = Math.floor(Math.random() * 5) + 3
+            }
+        
+            this.x += this.dx
+            this.y += this.dy
         
         
         // Asteroid weapon hit detection.
@@ -97,7 +84,7 @@ for (let i=0; i < 4; i++) {
     asteroidArray.push(new Asteroid(64, 64, "./images/spr_asteroid_s.png", x, y, "image", speed, dx, dy, raduis));
 }
 
-for (let i=0; i < 2; i++) {
+for (let i=0; i < 3; i++) {
     var raduis = 35
     let x = Math.random() * (innerWidth - raduis * 2) + raduis;
     let y = -300
@@ -108,7 +95,7 @@ for (let i=0; i < 2; i++) {
     asteroidArray.push(new Asteroid(128, 128, "./images/spr_asteroid_m.png", x, y, "image", speed, dx, dy, raduis));
 }
 
-for (let i=0; i < 2; i++) {
+for (let i=0; i < 3; i++) {
     var raduis = 35
     let x = Math.random() * (innerWidth - raduis * 2) + raduis;
     let y = -300
@@ -116,15 +103,13 @@ for (let i=0; i < 2; i++) {
     let dx = (Math.random() - 0.5) * 3;
     let dy = (Math.random() - 0.5) * 3;
     
-    asteroidArray.push(new Asteroid(256, 256, "./images/spr_asteroid_l.png", x, y, "image", speed, dx, dy, raduis));
+    asteroidArray.push(new Asteroid(165, 165, "./images/spr_asteroid_l2.png", x, y, "image", speed, dx, dy, raduis));
     
 }
 
 function asteroidHit(e, m, ei, mi) {
 
     if(m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
-
-        console.log('hit')
         asteroidArray.splice(ei,1)
         weaponArray.splice(mi,1)
         new enemyExplosion("./sfx/enemyExplosion.wav")
@@ -161,19 +146,19 @@ function asteroidHit(e, m, ei, mi) {
             } 
         }
         
-        if (e.h == 256) {
-                let x = e.x + 128
-                let y = e.y + 128
+        if (e.h == 165) {
+                let x = e.x + 82.5
+                let y = e.y + 82.5
             
             for ( let i=0; i<6; i++) {
                 var raduis = 35
                 // let x = e.x + 128
                 // let y = e.y + 128
-                let speed = Math.floor(Math.random() * 4) + 1
+                let speed = Math.floor(Math.random() * 3) + 1
                 let dx = (Math.random() - 0.5) * 10;
                 let dy = (Math.random() - 0.5) * 10;
                 
-                asteroidArray.push(new Asteroid(64, 64, "./images/spr_asteroid_s.png", x - 64, y - 64, "image", speed, dx, dy, raduis));
+                asteroidArray.push(new Asteroid(64, 64, "./images/spr_asteroid_s.png", x - 32, y - 32, "image", speed, dx, dy, raduis));
                 }
                 
                 for(let d=0; d < 5; d++) {
@@ -218,17 +203,16 @@ function playerCollide(e, m, ei, mi) {
     m.y = mouse.y
 
     if (m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
+        e.dy = -2
         playerLose()
     }
 }
 
-function asteroidCollide(e, m, ei, mi) {
+// function asteroidCollide(e, m, ei, mi) {
 
-    if(m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
-        
-        m.x = -m.x
-        e.x = -e.x
-        console.log('asteroid ' + ei + ' and asteroid ' + mi + ' collided' )
+//     if(m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
+//         e.dy = -2
+//         // console.log('asteroid ' + ei + ' and asteroid ' + mi + ' collided' )
 
-        }
-    }
+//     }
+// }

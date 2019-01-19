@@ -112,8 +112,6 @@ function Weapon(w, h, color, x, y, type) {
 function weaponHit(e, m, ei, mi) {
 
     if(m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
-
-        console.log('hit')
         enemyArray.splice(ei,1)
         weaponArray.splice(mi,1)
         new enemyExplosion("./sfx/enemyExplosion.wav")
@@ -179,6 +177,7 @@ function playerWeapon1(src) {
     this.sound.setAttribute("preload", "auto");
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
+    this.sound.volume = 0.5
     document.body.appendChild(this.sound);
     // this.play = function(){
         this.sound.play();
