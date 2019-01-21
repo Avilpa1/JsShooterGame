@@ -47,15 +47,14 @@ function enemyFire(x, y) {
 
 for (let i=0; i < enemyArray.length; i++) {
     setInterval(function() {
-        if (isRunning == true) {
-            if (enemyArray[i]) {
-                // console.log('enemy weapon fired')
-                let x = enemyArray[i].x + 30
-                let y = enemyArray[i].y + 30
-                enemyFire(x, y)
-            }
+        if (enemyArray[i]) {
+            let x = enemyArray[i].x + 30
+            let y = enemyArray[i].y + 30
+            enemyFire(x, y)
         }
     }, 600)
+    
+
 }
 
 function removeEnemyFire() {
@@ -78,11 +77,9 @@ function removeEnemyDebris() {
         if ( dbX >= innerWidth || dbX <= 0 ) {
             debrisArray.splice(i,1)
         }
-        
-        
-        
-        if ( i > 400 ) {
-            debrisArray.splice(i,1)
-        }
     }
 }
+
+setInterval(function() {
+    debrisArray.shift()
+},1000)

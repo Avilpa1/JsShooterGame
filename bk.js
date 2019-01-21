@@ -8,7 +8,7 @@ function Background(w, h, img, x, y) {
     this.y = y;
 
     this.update = function() {
-        ctx.drawImage(this.image, this.x, this.y += .3, this.w, this.h)
+        ctx.drawImage(this.image, this.x, this.y += .4, this.w, this.h)
         
             if(this.y >= innerHeight){
                 this.y = -innerHeight;
