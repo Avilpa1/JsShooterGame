@@ -1,6 +1,6 @@
 # JsShooterGame
 
-I created this game during my winter break while attending a coding boot camp. At the time i had about two months experice in JS, HTML and CSS. This was definetly fun to do and also a great learning experience that solidified my understanding of Javascript. I'll be polishing this game and adding more features soon. 
+I created this game during my winter break while attending coding boot camp. At the time i had about two months experice in JS, HTML and CSS. This was definetly fun to do and also a great learning experience that solidified my understanding of Javascript. I'll be polishing this game and adding more features soon. 
 
 Thanks for checking it out!
 
