@@ -1,4 +1,6 @@
-Hi, I created this game during my winter break while attending a coding boot camp. I had about two months experice in JS, HTML and CSS at this point. I went back and added a few features about a month later. This was definetly fun to do and also a great learning expeirce that solidified my understanding of Javascript. I'll be polishing this game and adding more features soon. 
+# JsShooterGame
+
+I created this game during my winter break while attending a coding boot camp. At the time i had about two months experice in JS, HTML and CSS. This was definetly fun to do and also a great learning experience that solidified my understanding of Javascript. I'll be polishing this game and adding more features soon. 
 
 Thanks for checking it out!
 
@@ -7,3 +9,6 @@ Movement - Mouse or touch pad<br>
 Weapon Fire - Mouse click or space bar<br>
 Music - M key<br>
 Pause - P key
+
+
+<a href='https://avilpa1.github.io/JsShooterGame/index.html'>Click to Play!</a>
