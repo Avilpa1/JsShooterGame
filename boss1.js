@@ -61,6 +61,17 @@ let bossInterval = setInterval(function() {
         clearInterval(specialInterval)
         clearInterval(shieldInterval)
         clearInterval(enemyInterval)
+        
+        for (let i=0; i < 4; i++) {
+            var raduis = 35
+            let x = Math.random() * (innerWidth - raduis * 2) + raduis;
+            let y = -300
+            let speed = Math.floor(Math.random() * 3) + 1
+            let dx = (Math.random() - 0.5) * 3;
+            let dy = (Math.random() - 0.5) * 3;
+            
+            asteroidArray.push(new Asteroid(165, 165, "./images/spr_asteroid_l2.png", x, y, "image", speed, dx, dy, raduis));
+        }
       } 
 }, 300)
 

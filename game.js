@@ -32,6 +32,7 @@ let mouse = {
 
 let isRunning = true;
 let musicPlaying = true;
+let gameStarted = false;
 
 let colorArray = [
     '#242424',
@@ -131,7 +132,7 @@ function animate() {
     shieldDisplay()
     missileDisplay()
     tick()
-    // menu()
+    
     
     if(playerHealth <= 0) {
        loseDisplay()
@@ -180,6 +181,7 @@ function loseDisplay() {
     ctx.font = "40px Arial";
     ctx.fillStyle = "red";
     ctx.fillText('Game Over!', innerWidth / 2 - 100, innerHeight / 2); 
+    document.getElementById("bodyId").style.cursor = "none";
 }
 
 function winDisplay() {
@@ -192,11 +194,13 @@ function pauseDisplay() {
     ctx.font = "40px Arial";
     ctx.fillStyle = "red";
     ctx.fillText('Game Paused', innerWidth / 2 - 100, innerHeight / 2); 
+    // menu()
 }
 
 function menu() {
     ctx.fillStyle = 'rgba(40, 40, 40, 0.60)';
     ctx.fillRect(innerWidth/2 / 2, innerHeight/2 / 2, 400, 400);
+    // document.getElementById("bodyId").style.cursor = "pointer";
 }
 
 function togglePause() {
@@ -204,6 +208,7 @@ function togglePause() {
 
   if (isRunning) {
     animate();
+    // document.getElementById("bodyId").style.cursor = "none";
   }
 }
 
@@ -220,7 +225,7 @@ function toggleMusic() {
 window.addEventListener("keypress",
     function(event) {
         if (event.keyCode == '112') {
-            togglePause();
+            togglePause(); 
             toggleMusic()
         }
 });
@@ -260,15 +265,35 @@ function bgChange() {
     let getCanvas = document.getElementById('canvasId')
     let num = Math.floor((Math.random() * 6) + 1)
     let bgURL = "url(./images/bg_space0" + num + ".png)"
-    
+
+    getCanvas.style.backgroundcolor = 'black'
     getCanvas.style.background = bgURL
     getCanvas.style.backgroundRepeat = "no-repeat"
     getCanvas.style.backgroundPosition = "center" 
     getCanvas.style.backgroundSize = "cover"
 }
 
+function gameStart() {
+    animate()
+    tick();
+    playMusic.play()
+    bgChange()
+    console.log('game started')
+    gameStarted = true;
+    
+//         const playPromise = playMusic.play()
+// if (playPromise !== undefined) {
+//     playPromise.then(_ => {
+//       // Automatic playback started!
+//       // Show playing UI.
+//       // We can now safely pause video...
+//       video.pause();
+//     })
+//     .catch(error => {
+//       // Auto-play was prevented
+//       // Show paused UI.
+//     });
+//   }
+}
 
-animate()
-tick();
-playMusic.play()
-bgChange()
+

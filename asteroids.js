@@ -131,7 +131,7 @@ function asteroidHit(e, m, ei, mi) {
             }
             
             for(let d=0; d < 5; d++) {
-                let size = Math.floor(Math.random() * 2) + 3
+                let size = Math.floor(Math.random() * 2) + 1.5
                 let dx = (Math.random() - 0.5) * 10;
                 let dy = (Math.random() - 0.5) * 10;
                 let color = colorArray[Math.floor(Math.random()*colorArray.length)]
@@ -162,7 +162,7 @@ function asteroidHit(e, m, ei, mi) {
                 }
                 
                 for(let d=0; d < 5; d++) {
-                    let size = Math.floor(Math.random() * 2) + 3
+                    let size = Math.floor(Math.random() * 2) + 1.5
                     let dx = (Math.random() - 0.5) * 10;
                     let dy = (Math.random() - 0.5) * 10;
                     let color = colorArray[Math.floor(Math.random()*colorArray.length)]
@@ -179,7 +179,7 @@ function asteroidHit(e, m, ei, mi) {
         } else {
 
              for(let d=0; d < 5; d++) {
-                let size = Math.floor(Math.random() * 3) + 3
+                let size = Math.floor(Math.random() * 3) + 1.5
                 let dx = (Math.random() - 0.5) * 10;
                 let dy = (Math.random() - 0.5) * 10;
                 let color = colorArray[Math.floor(Math.random()*colorArray.length)]

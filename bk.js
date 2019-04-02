@@ -1,7 +1,11 @@
 function Background(w, h, img, x, y) {
     this.image = new Image();
     this.image.src = img;
-
+    this.image.onload = function() {
+        if(gameStarted == false) {
+            gameStart()
+        }
+    }
     this.w = w;
     this.h = h;
     this.x = x;

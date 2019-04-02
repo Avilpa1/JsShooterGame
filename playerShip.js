@@ -87,7 +87,7 @@ function shieldHit() {
     ctx.fill()
     
     setTimeout(function() {
-        shieldArrayDisplay.splice(0,1)
+        shieldArrayDisplay.splice(0,1);
         
     },800)
         

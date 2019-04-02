@@ -31,6 +31,17 @@ function Enemy(w, h, color, x, y, type, speed, dx, dy) {
             this.y += this.dy
             this.draw();
             resetEnemies()
+            
+        // Collision detection between player and enemies.
+            for (let ei=0; ei < enemyArray.length; ei++) {
+                let e = enemyArray[ei]
+                
+                    for (let wi=0; wi < shipArray.length; wi++) {
+                        let w = shipArray[wi]
+                        
+                            playerCollideWithEnemy(e, w, ei, wi)
+                    }
+            }
         }
 }
 
@@ -71,7 +82,35 @@ let enemyInterval = setInterval(function(){
     }
 }, 5000)
 
+function playerCollideWithEnemy(e, m, ei, mi) {
+    
+    m.x = mouse.x 
+    m.y = mouse.y
 
+    if (m.x <= (e.x + e.w) && (m.x + m.w) >= e.x && m.y <= (e.y + e.h) && (m.y + m.h) >= e.y) {
+        playerHealth -= 10
+        enemyArray.splice(ei,1)
+        // weaponArray.splice(mi,1)
+        new enemyExplosion("./sfx/enemyExplosion.wav")
+        // score += 100
+
+         for(let d=0; d < 15; d++) {
+            let size = Math.floor(Math.random() * 3) + 1
+            let dx = (Math.random() - 0.5) * 20;
+            let dy = (Math.random() - 0.5) * 20;
+            let color = colorArray[Math.floor(Math.random()*colorArray.length)]
+            debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
+        }
+        
+        for(let d=0; d < 15; d++) {
+            let size = Math.floor(Math.random() * 1) + 1
+            let dx = (Math.random() - 0.5) * 30;
+            let dy = (Math.random() - 0.5) * 30;
+            let color = colorArray2[Math.floor(Math.random()*colorArray.length)]
+            debrisArray.push(new enemyDestroyed(e.x, e.y , size, dx, dy, color))
+        }
+    }
+}
 
 
 
