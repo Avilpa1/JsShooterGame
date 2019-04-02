@@ -2,8 +2,8 @@ Hi, I created this game during my winter break while attending a coding boot cam
 
 Thanks for checking it out!
 
-Controls:
-Movement - Mouse or touch pad
-Weapon Fire - Mouse click or space bar
-Music - M key
+Controls:<br>
+Movement - Mouse or touch pad<br>
+Weapon Fire - Mouse click or space bar<br>
+Music - M key<br>
 Pause - P key
